@@ -1,27 +1,44 @@
-import {createSiteMenuTemplate} from './view/site-menu-view.js';
-import {createFilterTemplate} from './view/filter-view.js';
-import {createTaskTemplate} from './view/task-view.js';
-import {createTaskEditTemplate} from './view/task-edit-view.js';
-import {createLoadMoreButtonTemplate} from './view/load-more-button-view.js';
-import {createBoardTemplate} from './view/board-view.js';
-import {renderTemplate, RenderPosition} from './render.js';
+import { renderTemplate } from './render.js';
+import { createHeaderTemplate } from './view/header.js';
+import { createMainTemplate } from './view/main.js';
+import { createTripTitleTemplate } from './view/trip-title.js';
 
-const TASK_COUNT = 3;
+const renderHeader = (container) => {
+  renderTemplate(container, createTripTitleTemplate());
+};
 
-const siteMainElement = document.querySelector('.main');
-const siteHeaderElement = siteMainElement.querySelector('.main__control');
+const app = (body) => {
+  renderTemplate(body, createHeaderTemplate());
+  renderHeader(body.querySelector('.page-header__container'));
+  renderTemplate(body, createMainTemplate());
+};
+app(document.body);
 
-renderTemplate(siteHeaderElement, createSiteMenuTemplate(), RenderPosition.BEFOREEND);
-renderTemplate(siteMainElement, createFilterTemplate(), RenderPosition.BEFOREEND);
-renderTemplate(siteMainElement, createBoardTemplate(), RenderPosition.BEFOREEND);
 
-const boardElement = siteMainElement.querySelector('.board');
-const taskListElement = boardElement.querySelector('.board__tasks');
+// import {createSiteMenuTemplate} from './view/create-form-view.js';
+// import {createFilterTemplate} from './view/filters-view.js';
+// import {createTaskTemplate} from './view/itinerary-point.js';
+// import {createTaskEditTemplate} from './view/edit-form-view.js';
+// import {createLoadMoreButtonTemplate} from './view/sorting-view.js';
+// import {createBoardTemplate} from './view/menu-view.js';
+// import {renderTemplate} from './render.js';
 
-renderTemplate(taskListElement, createTaskEditTemplate(), RenderPosition.BEFOREEND);
+// const TASK_COUNT = 3;
 
-for (let i = 0; i < TASK_COUNT; i++) {
-  renderTemplate(taskListElement, createTaskTemplate(), RenderPosition.BEFOREEND);
-}
+// const siteMainElement = document.querySelector('.main');
+// const siteHeaderElement = siteMainElement.querySelector('.main__control');
 
-renderTemplate(boardElement, createLoadMoreButtonTemplate(), RenderPosition.BEFOREEND);
+// renderTemplate(siteHeaderElement, createSiteMenuTemplate());
+// renderTemplate(siteMainElement, createFilterTemplate());
+// renderTemplate(siteMainElement, createBoardTemplate());
+
+// const boardElement = siteMainElement.querySelector('.board');
+// const taskListElement = boardElement.querySelector('.board__tasks');
+
+// renderTemplate(taskListElement, createTaskEditTemplate());
+
+// for (let i = 0; i < TASK_COUNT; i++) {
+//   renderTemplate(taskListElement, createTaskTemplate());
+// }
+
+// renderTemplate(boardElement, createLoadMoreButtonTemplate());
