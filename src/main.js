@@ -2,43 +2,62 @@ import { renderTemplate } from './render.js';
 import { createHeaderTemplate } from './view/header.js';
 import { createMainTemplate } from './view/main.js';
 import { createTripTitleTemplate } from './view/trip-title.js';
+import { createTripSortTemplate } from './view/sorting-view.js';
+import { createEditFormTemplate} from './view/edit-form-view.js';
+import { createTripEventsTemplate } from './view/trip-events-view.js';
+import { createTripEventItemTemplate } from './view/trip-event-item-view.js';
+import { createItineraryPointTemplate } from './view/itinerary-point.js';
+
+
+const renderSorting = (container) => {
+  renderTemplate(container, createTripSortTemplate());
+};
 
 const renderHeader = (container) => {
-  renderTemplate(container, createTripTitleTemplate());
+  renderTemplate(container, createHeaderTemplate());
+  renderTemplate(container.querySelector('.page-header__container'), createTripTitleTemplate());
+};
+
+const renderTripEventData = (container, editing) => {
+  renderTemplate(
+    container,
+    editing? createEditFormTemplate(): createItineraryPointTemplate(),
+  );
+};
+
+const renderTripEvent = (container, editing) => {
+  renderTemplate(container, createTripEventItemTemplate());
+  renderTripEventData(
+    container.querySelector('.trip-events__item'),
+    editing,
+  );
+};
+
+const renderTripEventsChildren = (container) => {
+  Array.from({length: 5}).forEach((_ignore, index) => renderTripEvent(
+    container,
+    index === 0
+  ));
+};
+
+const renderTripEvents = (container) => {
+  renderTemplate(container, createTripEventsTemplate());
+  renderTripEventsChildren(container.querySelector('.trip-events__list'));
+};
+
+const renderMainChildren = (container) => {
+  renderSorting(container);
+  renderTripEvents(container);
+};
+
+const renderMain = (container) => {
+  renderTemplate(container, createMainTemplate());
+  renderMainChildren(container.querySelector('.trip-events'));
 };
 
 const app = (body) => {
-  renderTemplate(body, createHeaderTemplate());
-  renderHeader(body.querySelector('.page-header__container'));
-  renderTemplate(body, createMainTemplate());
+
+  renderHeader(body);
+  renderMain(body);
 };
 app(document.body);
-
-
-// import {createSiteMenuTemplate} from './view/create-form-view.js';
-// import {createFilterTemplate} from './view/filters-view.js';
-// import {createTaskTemplate} from './view/itinerary-point.js';
-// import {createTaskEditTemplate} from './view/edit-form-view.js';
-// import {createLoadMoreButtonTemplate} from './view/sorting-view.js';
-// import {createBoardTemplate} from './view/menu-view.js';
-// import {renderTemplate} from './render.js';
-
-// const TASK_COUNT = 3;
-
-// const siteMainElement = document.querySelector('.main');
-// const siteHeaderElement = siteMainElement.querySelector('.main__control');
-
-// renderTemplate(siteHeaderElement, createSiteMenuTemplate());
-// renderTemplate(siteMainElement, createFilterTemplate());
-// renderTemplate(siteMainElement, createBoardTemplate());
-
-// const boardElement = siteMainElement.querySelector('.board');
-// const taskListElement = boardElement.querySelector('.board__tasks');
-
-// renderTemplate(taskListElement, createTaskEditTemplate());
-
-// for (let i = 0; i < TASK_COUNT; i++) {
-//   renderTemplate(taskListElement, createTaskTemplate());
-// }
-
-// renderTemplate(boardElement, createLoadMoreButtonTemplate());
