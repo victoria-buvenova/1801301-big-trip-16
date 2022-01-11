@@ -7,7 +7,10 @@ import { createEditFormTemplate} from './view/edit-form-view.js';
 import { createTripEventsTemplate } from './view/trip-events-view.js';
 import { createTripEventItemTemplate } from './view/trip-event-item-view.js';
 import { createItineraryPointTemplate } from './view/itinerary-point.js';
+import { mockPointList } from './mock/point.js';
 
+const data = mockPointList();
+window.console.log(data);
 
 const renderSorting = (container) => {
   renderTemplate(container, createTripSortTemplate());

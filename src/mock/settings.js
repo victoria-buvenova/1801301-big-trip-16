@@ -1,0 +1,15 @@
+export const MOCK_MAX_OFFERS = 4;
+export const MOCK_MAX_POINTS = 42;
+export const MOCK_MIN_PRICE = 650;
+export const MOCK_PRICE_DELTA = 2000;
+export const MOCK_DATE_RANGE = 5;
+export const MOCK_HOUR_RANGE = 3;
+export const MOCK_MINUTE_RANGE = 30;
+export const MOCK_POINT_DURATION_MIN = 30;
+export const MOCK_POINT_DURATION_MAX = 300;
+export const MOCK_MAX_DESCRIPTION = 5;
+export const MOCK_PICTURE_FACTOR = 100;
+export const MOCK_MIN_OFFERS_TAGS = 3;
+export const MOCK_MAX_OFFERS_TAGS = 12;
+export const MOCK_OFFER_MIN_VALUE = 30;
+export const MOCK_OFFER_MAX_VALUE = 180;
