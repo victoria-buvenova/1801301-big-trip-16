@@ -1,9 +1,11 @@
-const template = `<form class="event event--edit" action="#" method="post">
+const template = ({
+  typeIcon
+}) => `<form class="event event--edit" action="#" method="post">
 <header class="event__header">
   <div class="event__type-wrapper">
     <label class="event__type  event__type-btn" for="event-type-toggle-1">
       <span class="visually-hidden">Choose event type</span>
-      <img class="event__type-icon" src="img/icons/flight.png" alt="Event type icon" width="17" height="17">
+      <img class="event__type-icon" src="img/icons/${typeIcon}.png" alt="Event type icon" width="17" height="17">
     </label>
     <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
 
@@ -153,4 +155,6 @@ const template = `<form class="event event--edit" action="#" method="post">
 </form>`;
 
 
-export const createEditFormTemplate = () => template;
+export const createEditFormTemplate = () => template({
+  typeIcon: 'taxi'
+});
