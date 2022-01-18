@@ -10,6 +10,7 @@ const template = ({
   offerPrice,
   dayHoursFrom,
   dayHoursTo,
+  offerTitle
 }) => `<div class="event">
 <time class="event__date" datetime="${dateComputer}">${dateShort}</time>
 <div class="event__type">
@@ -30,7 +31,7 @@ const template = ({
 <h4 class="visually-hidden">Offers:</h4>
 <ul class="event__selected-offers">
   <li class="event__offer">
-    <span class="event__offer-title">Order Uber</span>
+    <span class="event__offer-title">${offerTitle}</span>
     +€&nbsp;
     <span class="event__offer-price">${offerPrice}</span>
   </li>
@@ -60,4 +61,5 @@ export const createItineraryPointTemplate = ({dateFrom, dateTo}={dateFrom: '2022
   offerPrice: 'offer price',
   dayHoursFrom: 'date & time from',
   dayHoursTo: 'date and time to',
+  offerTitle: 'offer title'
 });
