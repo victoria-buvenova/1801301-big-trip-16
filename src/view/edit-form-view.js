@@ -1,3 +1,18 @@
+const offerTemplate = ({
+  id,
+  name,
+  checked,
+  title,
+  price
+}) => `<div class="event__offer-selector">
+<input class="event__offer-checkbox  visually-hidden" id="${id}" type="checkbox" name="${name}" ${checked ? 'checked= ""' : ''}>
+<label class="event__offer-label" for="${id}">
+  <span class="event__offer-title">${title}</span>
+  +€&nbsp;
+  <span class="event__offer-price">${price}</span>
+</label>
+</div>`;
+
 const template = ({
   typeIcon,
   eventType,
@@ -5,7 +20,8 @@ const template = ({
   startDateAndTime,
   endDateAndTime,
   price,
-  destinationDescription
+  destinationDescription,
+  offers
 }) => `<form class="event event--edit" action="#" method="post">
 <header class="event__header">
   <div class="event__type-wrapper">
@@ -13,7 +29,7 @@ const template = ({
       <span class="visually-hidden">Choose event type</span>
       <img class="event__type-icon" src="img/icons/${typeIcon}.png" alt="Event type icon" width="17" height="17">
     </label>
-    <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">$
+    <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
 
     <div class="event__type-list">
       <fieldset class="event__type-group">
@@ -106,50 +122,7 @@ const template = ({
     <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
     <div class="event__available-offers">
-      <div class="event__offer-selector">
-        <input class="event__offer-checkbox  visually-hidden" id="event-offer-luggage-1" type="checkbox" name="event-offer-luggage" checked="">
-        <label class="event__offer-label" for="event-offer-luggage-1">
-          <span class="event__offer-title">Add luggage</span>
-          +€&nbsp;
-          <span class="event__offer-price">50</span>
-        </label>
-      </div>
-
-      <div class="event__offer-selector">
-        <input class="event__offer-checkbox  visually-hidden" id="event-offer-comfort-1" type="checkbox" name="event-offer-comfort" checked="">
-        <label class="event__offer-label" for="event-offer-comfort-1">
-          <span class="event__offer-title">Switch to comfort</span>
-          +€&nbsp;
-          <span class="event__offer-price">80</span>
-        </label>
-      </div>
-
-      <div class="event__offer-selector">
-        <input class="event__offer-checkbox  visually-hidden" id="event-offer-meal-1" type="checkbox" name="event-offer-meal">
-        <label class="event__offer-label" for="event-offer-meal-1">
-          <span class="event__offer-title">Add meal</span>
-          +€&nbsp;
-          <span class="event__offer-price">15</span>
-        </label>
-      </div>
-
-      <div class="event__offer-selector">
-        <input class="event__offer-checkbox  visually-hidden" id="event-offer-seats-1" type="checkbox" name="event-offer-seats">
-        <label class="event__offer-label" for="event-offer-seats-1">
-          <span class="event__offer-title">Choose seats</span>
-          +€&nbsp;
-          <span class="event__offer-price">5</span>
-        </label>
-      </div>
-
-      <div class="event__offer-selector">
-        <input class="event__offer-checkbox  visually-hidden" id="event-offer-train-1" type="checkbox" name="event-offer-train">
-        <label class="event__offer-label" for="event-offer-train-1">
-          <span class="event__offer-title">Travel by train</span>
-          +€&nbsp;
-          <span class="event__offer-price">40</span>
-        </label>
-      </div>
+    ${offers.map(offerTemplate).join('')}
     </div>
   </section>
 
@@ -168,5 +141,42 @@ export const createEditFormTemplate = () => template({
   startDateAndTime: 'start D & T',
   endDateAndTime: 'end D & T',
   price: 'how much?',
-  destinationDescription: 'Short description of the destination'
+  destinationDescription: 'Short description of the destination',
+  offers: [
+    {
+      id: 'event-offer-luggage-1',
+      name: 'event-offer-luggage',
+      checked: true,
+      title: 'Add luggage',
+      price: '53'
+    },
+    {
+      id: 'event-offer-comfort-1',
+      name: 'event-offer-comfort',
+      checked: true,
+      title: 'Switch to comfort',
+      price: '80'
+    },
+    {
+      id: 'event-offer-meal-1',
+      name: 'event-offer-meal',
+      checked: false,
+      title: 'Add meal',
+      price: '15'
+    },
+    {
+      id: 'event-offer-seats-1',
+      name: 'event-offer-seats',
+      checked: false,
+      title: 'Choose seats',
+      price: '20'
+    },
+    {
+      id: 'event-offer-train-1',
+      name: 'event-offer-train-1',
+      checked: false,
+      title: 'Travel by train',
+      price: '26'
+    }
+  ]
 });

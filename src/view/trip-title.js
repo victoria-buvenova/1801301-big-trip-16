@@ -6,13 +6,14 @@ const template = ({
   table,
   stats,
   newEvent,
-  destinationCities
+  destinationCities,
+  startDateEndDate
 }) => `<div class="trip-main">
 <section class="trip-main__trip-info  trip-info">
   <div class="trip-info__main">
     <h1 class="trip-info__title">${destinationCities}</h1>
 
-    <p class="trip-info__dates">Mar 18&nbsp;—&nbsp;20</p>
+    <p class="trip-info__dates">${startDateEndDate}</p>
   </div>
 
   <p class="trip-info__cost">
@@ -63,5 +64,6 @@ export const createTripTitleTemplate = () => template({
   table: 'The table',
   stats: 'statistics',
   newEvent: 'new event button',
-  destinationCities: 'Ch - G - A'
+  destinationCities: 'Ch - G - A',
+  startDateEndDate: 'start & end'
 });
