@@ -13,6 +13,16 @@ const offerTemplate = ({
 </label>
 </div>`;
 
+const eventTypeTemplate = ({
+  id,
+  checked,
+  title,
+}) => `<div class="event__type-item">
+<input id="${id}" class="event__type-input  visually-hidden" type="radio" name="event-type" value="taxi" ${checked ? 'checked= ""' : ''}>
+<label class="event__type-label  event__type-label--taxi" for="${id}">${title}</label>
+</div>`;
+
+
 const template = ({
   typeIcon,
   eventType,
@@ -35,59 +45,16 @@ const template = ({
       <fieldset class="event__type-group">
         <legend class="visually-hidden">Event type</legend>
 
-        <div class="event__type-item">
-          <input id="event-type-taxi-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="taxi">
-          <label class="event__type-label  event__type-label--taxi" for="event-type-taxi-1">Taxi</label>
-        </div>
+${eventType.map(eventTypeTemplate).join('')}
+</fieldset>
+</div>
+</div>
 
-        <div class="event__type-item">
-          <input id="event-type-bus-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="bus">
-          <label class="event__type-label  event__type-label--bus" for="event-type-bus-1">Bus</label>
-        </div>
-
-        <div class="event__type-item">
-          <input id="event-type-train-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="train">
-          <label class="event__type-label  event__type-label--train" for="event-type-train-1">Train</label>
-        </div>
-
-        <div class="event__type-item">
-          <input id="event-type-ship-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="ship">
-          <label class="event__type-label  event__type-label--ship" for="event-type-ship-1">Ship</label>
-        </div>
-
-        <div class="event__type-item">
-          <input id="event-type-drive-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="drive">
-          <label class="event__type-label  event__type-label--drive" for="event-type-drive-1">Drive</label>
-        </div>
-
-        <div class="event__type-item">
-          <input id="event-type-flight-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="flight" checked="">
-          <label class="event__type-label  event__type-label--flight" for="event-type-flight-1">Flight</label>
-        </div>
-
-        <div class="event__type-item">
-          <input id="event-type-check-in-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="check-in">
-          <label class="event__type-label  event__type-label--check-in" for="event-type-check-in-1">Check-in</label>
-        </div>
-
-        <div class="event__type-item">
-          <input id="event-type-sightseeing-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="sightseeing">
-          <label class="event__type-label  event__type-label--sightseeing" for="event-type-sightseeing-1">Sightseeing</label>
-        </div>
-
-        <div class="event__type-item">
-          <input id="event-type-restaurant-1" class="event__type-input  visually-hidden" type="radio" name="event-type" value="restaurant">
-          <label class="event__type-label  event__type-label--restaurant" for="event-type-restaurant-1">Restaurant</label>
-        </div>
-      </fieldset>
-    </div>
-  </div>
-
-  <div class="event__field-group  event__field-group--destination">
-    <label class="event__label  event__type-output" for="event-destination-1">
-      ${eventType}
-    </label>
-    <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${destinationCity}" list="destination-list-1">
+   <div class="event__field-group  event__field-group--destination">
+   <label class="event__label  event__type-output" for="event-destination-1">
+   ${eventType.find( (x) => x.checked).title}
+ </label>
+ <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${destinationCity}" list="destination-list-1">
     <datalist id="destination-list-1">
       <option value="Amsterdam"></option>
       <option value="Geneva"></option>
@@ -136,7 +103,58 @@ const template = ({
 
 export const createEditFormTemplate = () => template({
   typeIcon: 'taxi',
-  eventType: 'Flight or smth',
+  eventType: [
+    {
+      id: 'event-type-taxi-1',
+      checked: false,
+      title: 'Taxi'
+    },
+    {
+      id: 'event-type-bus-1',
+      checked: false,
+      title: 'Bus'
+    },
+    {
+      id: 'event-type-train-1',
+      checked: false,
+      title: 'Train'
+    },
+    {
+      id: 'event-type-ship-1',
+      checked: false,
+      title: 'Ship'
+    },
+    {
+      id: 'event-type-drive-1',
+      checked: false,
+      title: 'Drive'
+    },
+    {
+      id: 'event-type-flight-1',
+      checked: true,
+      title: 'Flight'
+    },
+    {
+      id: 'event-type-check-in-1',
+      checked: false,
+      title: 'Check-in'
+    },
+    {
+      id: 'event-type-sightseeing-1',
+      checked: false,
+      title: 'Sightseeing'
+    },
+    {
+      id: 'event-type-sightseeing-1',
+      checked: false,
+      title: 'Sightseeing'
+    },
+    {
+      id: 'event-type-restaurant-1',
+      checked: false,
+      title: 'Restaurant'
+    }
+  ],
   destinationCity: 'Destination city',
   startDateAndTime: 'start D & T',
   endDateAndTime: 'end D & T',
