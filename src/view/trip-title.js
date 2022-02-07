@@ -56,6 +56,42 @@ const template = ({
 <button class="trip-main__event-add-btn  btn  btn--big  btn--yellow" type="button">${newEvent}</button>
 </div>`;
 
+const createItem = () => ({
+  dateFrom: new Date (2021, 12 * Math.random(), 20 * Math.random()).toISOString(),
+  dateTo: new Date (2021, 12 * Math.random(), 20 * Math.random()).toISOString(),
+  destination: ['London', 'Paris', 'Auckland'][Math.floor(3 * Math.random())]
+});
+
+const tripDz = Array.from({length: 15}, createItem);
+
+const reducerDz = (accumulator, item) => {
+  if(accumulator.startDate === 'not found' || accumulator.startDate > item.dateFrom) {
+    accumulator.startDate = item.dateFrom;
+    accumulator.startPoint = item.destination;
+  }
+
+  if(accumulator.endDate  === 'not found' || accumulator.endDate  < item.dateTo) {
+    accumulator.endDate = item.dateTo;
+    accumulator.endPoint = item.destination;
+  }
+
+  return accumulator;
+};
+
+const initDz = () => (
+  {
+    startPoint: 'not found',
+    startDate: 'not found',
+    endPoint: 'not found',
+    endDate: 'not found',
+  }
+);
+
+const startFinish = () => tripDz.reduce(reducerDz, initDz());
+// eslint-disable-next-line no-console
+console.log(startFinish());
+
+
 export const createTripTitleTemplate = () => template({
   totalPrice: 'Total price',
   everything: 'all trips',

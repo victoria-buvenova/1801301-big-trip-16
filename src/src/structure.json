@@ -1,0 +1,21 @@
+{
+  "Big trip": {
+    "general info": {
+      "start and finish": {},
+      "total price": {},
+      "the table": {
+        "all": {},
+        "future": {},
+        "past": {}
+      },
+      "stats": {}
+    },
+    "Itinerary": {
+      "headers": {
+        "day": {}
+      },
+      "trip list": {}
+    },
+    "stats charts": {}
+  }
+}
